@@ -1,6 +1,4 @@
-let algebra = 5,
-    geography = 4,
-    physics = 4;
+let name = 'Сережа';
+let message = 'Привет, мир! Меня зовут ' + name;
 
-let average = Math.round((algebra + geography + physics) / 3); 
-console.log(average);
+console.log(message);
