@@ -13,6 +13,23 @@ function calculateQuadraticEquation(){
 function getResult(a,b,c){
     // код для задачи №1 писать здесь
     //return x;
+    let discriminant = Math.pow(b, 2) - 4 * a * c;
+
+    if (discriminant < 0) {
+        console.log(`Дискриминант ${discriminant} меньше нуля. Корней нет.`)
+    } else if (discriminant === 0) {
+        let x = -b / (2 * a);
+
+        console.log(x);
+        return x;
+    } else {
+        let x1 = (-b + Math.sqrt(discriminant)) / (2 * a);
+        let x2 = (-b - Math.sqrt(discriminant)) / (2 * a);
+
+        console.log('Первый корень: ' + x1);
+        console.log('Второй корень: ' + x2);
+        return [x1, x2];
+    }
 }
 
 function calculateDrinkTask(){
@@ -37,4 +54,19 @@ function calculateAverageRating(){
 function getAverageMark(marks){
     // код для задачи №3 писать здесь
     //return averageMark;
+    if (marks.length > 5) {
+        console.log('Количество оценок больше 5. Берем последние 5 оценок');
+        let lastMarks = marks.slice(marks.length - 5);
+        marks = lastMarks;
+        console.log('новый массив: ' + marks);
+    }
+
+    let sum = null;
+
+    for (let i = 0; i < marks.length; i++) {
+        sum +=  marks[i];
+    }
+    
+    let averageMark = Math.round(sum / marks.length);
+    return averageMark;
 }
