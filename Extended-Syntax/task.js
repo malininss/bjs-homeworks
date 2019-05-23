@@ -29,7 +29,7 @@ function getResult(a,b,c){
         console.log('Первый корень: ' + x1);
         console.log('Второй корень: ' + x2);
         return [x1, x2];
-    }
+    };
 }
 
 function calculateDrinkTask(){
@@ -39,10 +39,18 @@ function calculateDrinkTask(){
     window.drink.textContent = drink;
 }
 
-function askDrink(name,dateOfBirthday){
+function askDrink(name, dateOfBirthday){
     // код для задачи №2 писать здесь
     //console.log(result)
     //return result;
+    name = name || 'Товарищ';
+    let year = (new Date).getFullYear();
+    
+    if (year - dateOfBirthday.getFullYear() >= 18) {
+        console.log(`Не желаете ли олд-фэшн, ${name}?`);
+    } else {
+        console.log(`Сожалею, ${name}, но я не могу вам продать алкоголь. Зато могу предложить вам замечательный клюквенный компот!`);
+    };
 }
 
 function calculateAverageRating(){
@@ -55,17 +63,17 @@ function getAverageMark(marks){
     // код для задачи №3 писать здесь
     //return averageMark;
     if (marks.length > 5) {
-        console.log('Количество оценок больше 5. Берем последние 5 оценок');
+        console.log('Количество оценок больше 5. Берем последние 5 оценок.');
         let lastMarks = marks.slice(marks.length - 5);
         marks = lastMarks;
         console.log('новый массив: ' + marks);
-    }
+    };
 
     let sum = null;
 
     for (let i = 0; i < marks.length; i++) {
         sum +=  marks[i];
-    }
+    };
     
     let averageMark = Math.round(sum / marks.length);
     return averageMark;
