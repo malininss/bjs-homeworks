@@ -1,6 +1,5 @@
 'use strict'
 
-
 // //--------------Задание 1
 
 // class Weapon {
@@ -97,117 +96,185 @@
 //------------------------Задание 2 
 
 
-class Weapon {
-    takeDamage(damage) {
-        this.durability -= damage;
-        if (this.durability < 0) {
-            this.durability = 0;
+// class Weapon {
+//     takeDamage(damage) {
+//         this.durability -= damage;
+//         if (this.durability < 0) {
+//             this.durability = 0;
+//         }
+//     }
+
+//     getDamage() {
+//         if ((this.durability / this.startDurability) <= 0.3) {
+//             return  this.attack / 2;
+//         } else if (!this.durability) {
+//             return 0;
+//         } 
+//         return this.attack;
+//     }
+
+//     isBroken() {
+//         return Boolean(!this.durability);
+//     }
+// }
+
+// class Arm extends Weapon {
+//     constructor() {
+//         super(); //// Методом тыка дошел, что сюда нужно добавить super. почему??
+//         this.name = 'Рука';
+//         this.attack = 1;
+//         this.durability = Infinity;
+//         this.startDurability = this.durability;
+//         this.range = 1;
+//     }
+// }
+
+// class Bow extends Weapon {
+//     constructor() {
+//         super();
+//         this.name = 'Лук';
+//         this.attack = 10;
+//         this.durability = 200;
+//         this.startDurability = this.durability;
+//         this.range = 3;
+//     }
+// }
+
+// class Sword extends Weapon {
+//     constructor() {
+//         super();
+//         this.name = 'Меч';
+//         this.attack = 25;
+//         this.durability = 500;
+//         this.startDurability = this.durability;
+//         this.range = 1;
+//     }
+// }
+
+// class Knife extends Weapon {
+//     constructor() {
+//         super();
+//         this.name = 'Нож';
+//         this.attack = 5;
+//         this.durability = 300;
+//         this.startDurability = this.durability;
+//         this.range = 1;
+//     }
+// }
+
+// class Staff extends Weapon {
+//     constructor() {
+//         super();
+//         this.name = 'Посох';
+//         this.attack = 8;
+//         this.durability = 300;
+//         this.startDurability = this.durability;
+//         this.range = 3;
+//     }
+// }
+
+// class ImprovedBow extends Bow {
+//     constructor() {
+//         super();
+//         this.name = 'Длинный лук';
+//         this.attack = 15;
+//         this.range = 5;
+//     }
+// }
+
+// class Hatchet extends Sword {
+//     constructor() {
+//         super();
+//         this.name = 'Секира';
+//         this.attack = 27;
+//         this.durability = 800;
+//     }
+// }
+
+// class StaffOfStorm extends Staff {
+//     constructor() {
+//         super();
+//         this.name = 'Посох бури';
+//         this.attack = 10;
+//         this.range = 3;
+//     }
+// }
+
+// const arm = new Arm();
+// const bow = new Bow();
+// const sword = new Sword();
+// const knife = new Knife();
+// const staff = new Staff();
+// const improvedBow = new ImprovedBow();
+// const hatchet = new Hatchet();
+// const staffOfStorm = new StaffOfStorm();
+
+// console.log(arm, bow, sword, knife, staff, improvedBow, hatchet, staffOfStorm);
+
+
+//-------------Задание 3
+
+
+class StudentLog {
+
+    constructor(name = 'Анонимный ученик') {
+        this.name = name;
+        this.allGrades = {
+            algebra: [],
+            geometry: [],
+            math: []
         }
     }
 
-    getDamage() {
-        if ((this.durability / this.startDurability) <= 0.3) {
-            return  this.attack / 2;
-        } else if (!this.durability) {
+    getName() {
+        return this.name;
+    }
+
+    addGrade(grade, subject) {
+
+        if (!this.allGrades[subject]) {
+            console.log (`Предмет ${subject} не существует!`);
+        } else if (isNaN(grade) || grade < 1 || grade > 5) {
+            console.log(`Вы пытались поставить оценку "${grade}" по предмету "${subject}". Допускаются только числа от 1 до 5`);
+        } else {
+            this.allGrades[subject].push(grade);
+        }
+        
+        return this.allGrades[subject].length;
+    }
+
+    getAverageBySubject(subject) {
+
+        if (!this.allGrades[subject]) {
             return 0;
-        } 
-        return this.attack;
+        }
+
+        let sum = 0;
+        this.allGrades[subject].forEach(element => {
+            console.log(element);
+            sum += element;
+        });
+
+        let average = sum / this.allGrades[subject].length;
+        
+        return average;
+
     }
 
-    isBroken() {
-        return Boolean(!this.durability);
-    }
-}
+    getTotalAverage() {
 
-class Arm extends Weapon {
-    constructor() {
-        super(); //// Методом тыка дошел, что сюда нужно добавить super. почему??
-        this.name = 'Рука';
-        this.attack = 1;
-        this.durability = Infinity;
-        this.startDurability = this.durability;
-        this.range = 1;
-    }
-}
-
-class Bow extends Weapon {
-    constructor() {
-        super();
-        this.name = 'Лук';
-        this.attack = 10;
-        this.durability = 200;
-        this.startDurability = this.durability;
-        this.range = 3;
-    }
-}
-
-class Sword extends Weapon {
-    constructor() {
-        super();
-        this.name = 'Меч';
-        this.attack = 25;
-        this.durability = 500;
-        this.startDurability = this.durability;
-        this.range = 1;
+        let sum = 0,
+            counter = 0;
+        
+        for (let key in this.allGrades) {
+            this.allGrades[key].forEach(element => {
+                sum += element;
+                counter++;
+            });
+        }
+        
+        return sum / counter;
     }
 }
 
-class Knife extends Weapon {
-    constructor() {
-        super();
-        this.name = 'Нож';
-        this.attack = 5;
-        this.durability = 300;
-        this.startDurability = this.durability;
-        this.range = 1;
-    }
-}
-
-class Staff extends Weapon {
-    constructor() {
-        super();
-        this.name = 'Посох';
-        this.attack = 8;
-        this.durability = 300;
-        this.startDurability = this.durability;
-        this.range = 3;
-    }
-}
-
-class ImprovedBow extends Bow {
-    constructor() {
-        super();
-        this.name = 'Длинный лук';
-        this.attack = 15;
-        this.range = 5;
-    }
-}
-
-class Hatchet extends Sword {
-    constructor() {
-        super();
-        this.name = 'Секира';
-        this.attack = 27;
-        this.durability = 800;
-    }
-}
-
-class StaffOfStorm extends Staff {
-    constructor() {
-        super();
-        this.name = 'Посох бури';
-        this.attack = 10;
-        this.range = 3;
-    }
-}
-
-const arm = new Arm();
-const bow = new Bow();
-const sword = new Sword();
-const knife = new Knife();
-const staff = new Staff();
-const improvedBow = new ImprovedBow();
-const hatchet = new Hatchet();
-const staffOfStorm = new StaffOfStorm();
-
-console.log(arm, bow, sword, knife, staff, improvedBow, hatchet, staffOfStorm);
+const student = new StudentLog('Вася')
