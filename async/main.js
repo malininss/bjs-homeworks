@@ -11,26 +11,25 @@
                 // console.log('Время не равно!!')
             }
         }
+    };
+    
+    const setDailyRhythm = (checktime, checktime2) => {
 
+        const firstAlarm = setAlarm(checktime, goodMorningMessage);
+        const secondAlarm = setAlarm(checktime2, goodEveningMessage);
+
+        let getCurrentTime = () => {
+            let time = new Date().toLocaleTimeString().slice(0, -3);
+                // console.log('текущее время: ' + time);
+            firstAlarm(time);
+            secondAlarm(time);
+        };
+
+        return setInterval(getCurrentTime, 1000);
     };
 
     const goodMorningMessage = () => console.log('Доброе утро!');
     const goodEveningMessage = () => console.log('Пора спать!');
 
-    const firstAlarm = setAlarm('23:36:20', goodMorningMessage);
-    const secondAlarm = setAlarm('23:36:25', goodEveningMessage);
-    
-    const setDailyRhythm = (checktime, checktime2) => {
 
-        let getCurrentTime = () => {
-            let time = new Date().toLocaleTimeString();
-            // console.log('текущее время: ' + time);
-            checktime(time);
-            checktime2(time);
-        };
-
-        return setInterval(getCurrentTime, 1000);
-
-    };
-
-    setDailyRhythm(firstAlarm, secondAlarm);
+    setDailyRhythm('21:35', '23:36');
