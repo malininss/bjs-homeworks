@@ -13,7 +13,7 @@ function memoize(fn, limit) {
 
     let newResult = {
       args: funcArguments,
-      result: fn(funcArguments[0], funcArguments[1]) 
+      result: fn.apply(this, funcArguments)
     };
 
     result.push(newResult);
@@ -38,3 +38,4 @@ const mSum = memoize(sum, 5);
 
 console.log(mSum(3, 4));
 console.log(mSum(3, 4));
+console.log(mSum(3, 2, 3));
